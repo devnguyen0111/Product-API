@@ -1,7 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DataAccess.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace DataAccess.Entities
+namespace DataAccess.Data
 {
     public partial class ProductBEDbContext : DbContext
     {

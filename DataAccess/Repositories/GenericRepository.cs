@@ -1,5 +1,5 @@
 ﻿using System.Linq.Expressions;
-using DataAccess.Entities;
+using DataAccess.Data;
 using DataAccess.IRepositories;
 using DataAccess.PaginatedList;
 using Microsoft.EntityFrameworkCore;

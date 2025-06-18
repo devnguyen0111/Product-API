@@ -133,9 +133,9 @@ builder.Services.AddAuthentication(options =>
 });
 builder.Services.AddAuthorization();
 
-builder.WebHost
-    .UseKestrel()
-    .UseUrls("http://0.0.0.0:5006", "https://0.0.0.0:7050");
+//builder.WebHost
+//    .UseKestrel()
+//    .UseUrls("http://0.0.0.0:5006", "https://0.0.0.0:7050");
 
 var app = builder.Build();
 

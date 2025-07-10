@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppHost", "..\AppHost\AppHo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceDefaults", "..\ServiceDefaults\ServiceDefaults.csproj", "{01946F2F-29C4-48F7-959E-74E8E76B8B04}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatbotAPI", "..\ChatbotAPI\ChatbotAPI.csproj", "{8BFE699E-E735-4C47-9705-77B04E948C1A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{01946F2F-29C4-48F7-959E-74E8E76B8B04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01946F2F-29C4-48F7-959E-74E8E76B8B04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01946F2F-29C4-48F7-959E-74E8E76B8B04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BFE699E-E735-4C47-9705-77B04E948C1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BFE699E-E735-4C47-9705-77B04E948C1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BFE699E-E735-4C47-9705-77B04E948C1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BFE699E-E735-4C47-9705-77B04E948C1A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

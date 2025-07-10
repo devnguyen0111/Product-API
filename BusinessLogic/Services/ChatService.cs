@@ -118,5 +118,46 @@ namespace BusinessLogic.Services
             repo.Delete(entity);
             await _uow.SaveAsync();
         }
+
+        public async Task<List<ChatMessageDTO>> GetAllChatMessageByUserId(int userId)
+        {
+            var userRepo = _uow.GetRepository<User>();
+            var chatMessageRepo = _uow.GetRepository<ChatMessage>();
+
+            // Use GetByIdAsync for PK lookup
+            var user = await userRepo.GetByIdAsync(userId);
+
+            if (user == null)
+            {
+                return null; // or throw an exception if preferred
+            }
+
+            var withUser = await chatMessageRepo.Entities
+                .Include(cm => cm.User)
+                .Where(cm => cm.UserId == userId).ToListAsync();
+
+            return _mapper.Map<List<ChatMessageDTO>>(withUser);
+        }
+
+        public async Task<List<ChatMessageDTO>> GetAllChatMessageByChatBoxId(int userId)
+        {
+            var userRepo = _uow.GetRepository<User>();
+            var chatMessageRepo = _uow.GetRepository<ChatMessage>();
+
+            // Use GetByIdAsync for PK lookup
+            var user = await userRepo.GetByIdAsync(userId);
+
+            if (user == null)
+            {
+                return null; // or throw an exception if preferred
+            }
+
+            var withUser = await chatMessageRepo.Entities
+                .Include(cm => cm.User)
+                .Where(cm => cm.ChatBoxId == userId)
+                .ToListAsync();
+
+            return _mapper.Map<List<ChatMessageDTO>>(withUser);
+        }
     }
 }

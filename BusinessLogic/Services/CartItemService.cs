@@ -120,14 +120,19 @@ namespace BusinessLogic.Services
                 throw new ErrorException(StatusCodes.Status404NotFound, ResponseCodeConstants.BAD_REQUEST, "Cart Item not found!");
             }
 
-            if (cartItemDTO.Quantity == 0)
+            if (cartItemDTO.Quantity <= 0)
             {
                 cartItemDTO.Quantity = 1;
             }
 
-            if (cartItemDTO.CartId == 0)
+            if (cartItemDTO.CartId == 0 || cartItemDTO.CartId == null)
             {
                 cartItemDTO.CartId = existingCartItem.CartId;
+            }
+
+            if (cartItemDTO.ProductId == 0 || cartItemDTO.ProductId == null)
+            {
+                cartItemDTO.ProductId = existingCartItem.ProductId;
             }
 
             IGenericRepository<Product> productRepository = _unitOfWork.GetRepository<Product>();
@@ -156,5 +161,6 @@ namespace BusinessLogic.Services
             repository.Delete(existingCartItem);
             await _unitOfWork.SaveAsync();
         }
-    }
+    
+}
 }

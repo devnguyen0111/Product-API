@@ -13,7 +13,6 @@ namespace ProductAPI.Controllers
     {
         private readonly IProductService _productService;
 
-        // Constructor
         public ProductsController(IProductService productService)
         {
             _productService = productService;
@@ -26,11 +25,13 @@ namespace ProductAPI.Controllers
         /// <param name="pageSize">Number of items per page</param>
         /// <param name="idSearch">Filter by product id</param>
         /// <param name="nameSearch">Filter by product name</param>
-        /// <param name="sortBy">Sort by field (price, name, category)</param>
+        /// <param name="sortBy">Sort by field (price, name, category, brand, rating)</param>
         /// <param name="sortOrder">Sort order (asc, desc)</param>
         /// <param name="categoryId">Filter by category id</param>
+        /// <param name="brandId">Filter by brand id</param>
         /// <param name="minPrice">Filter by minimum price</param>
         /// <param name="maxPrice">Filter by maximum price</param>
+        /// <param name="minRating">Filter by minimum rating</param>
         /// <returns>Paginated list of products</returns>
         [HttpGet]
         public async Task<IActionResult> GetPaginatedProductsAsync(
@@ -41,8 +42,10 @@ namespace ProductAPI.Controllers
             string? sortBy = null,
             string? sortOrder = null,
             int? categoryId = null,
+            int? brandId = null, // Thêm bộ lọc Brand
             decimal? minPrice = null,
-            decimal? maxPrice = null)
+            decimal? maxPrice = null,
+            decimal? minRating = null) // Thêm bộ lọc Rating
         {
             PaginatedList<GetProductDTO> result = await _productService.GetPaginatedProductsAsync(
                 pageIndex,
@@ -52,8 +55,10 @@ namespace ProductAPI.Controllers
                 sortBy,
                 sortOrder,
                 categoryId,
+                brandId, // Truyền brandId
                 minPrice,
-                maxPrice);
+                maxPrice,
+                minRating); // Truyền minRating
             return Ok(new BaseResponseModel<PaginatedList<GetProductDTO>>(
                     statusCode: StatusCodes.Status200OK,
                     code: ResponseCodeConstants.SUCCESS,

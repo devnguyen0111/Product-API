@@ -17,6 +17,9 @@ using VNPAY.NET;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Register HttpContextAccessor
+builder.Services.AddHttpContextAccessor();
+
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -102,6 +105,8 @@ builder.Services.AddScoped<ICartItemService, CartItemService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IPaymentService, PaymentService>();
 builder.Services.AddScoped<IChatService, ChatService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IStoreLocationService, StoreLocationService>();
 
 builder.Services.AddSingleton<IVnpay, Vnpay>();
 

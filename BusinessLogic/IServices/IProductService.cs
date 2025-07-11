@@ -10,11 +10,13 @@ namespace BusinessLogic.IServices
             int pageSize,
             int? idSearch,
             string? nameSearch,
-            string? sortBy = null,
-            string? sortOrder = null,
-            int? categoryId = null,
-            decimal? minPrice = null,
-            decimal? maxPrice = null);
+            string? sortBy,
+            string? sortOrder,
+            int? categoryId,
+            int? brandId, // Thêm brandId
+            decimal? minPrice,
+            decimal? maxPrice,
+            decimal? minRating); // Thêm minRating
 
         Task<GetProductDTO> getProductDTO(int productId);
     }

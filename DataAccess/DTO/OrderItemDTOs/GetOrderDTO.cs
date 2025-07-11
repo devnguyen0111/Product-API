@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataAccess.DTO.CartDTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,5 +12,8 @@ namespace DataAccess.DTO.OrderItemDTOs
         public int OrderId { get; set; }
 
         public string? Username { get; set; }
+        public GetCartDTO? Cart { get; set; }
+        public DateTime OrderDate { get; set; }
+
     }
 }

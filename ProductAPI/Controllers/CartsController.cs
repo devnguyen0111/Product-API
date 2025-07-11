@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.IServices;
+using BusinessLogic.Services;
 using DataAccess.Constant;
 using DataAccess.DTO.CartDTOs;
 using DataAccess.PaginatedList;
@@ -12,7 +13,6 @@ namespace ProductAPI.Controllers
     public class CartsController : Controller
     {
         private readonly ICartService _cartService;
-
         // Constructor
         public CartsController(ICartService cartService)
         {
@@ -29,11 +29,12 @@ namespace ProductAPI.Controllers
         /// <param name="idSearch">product id</param>
         /// <param name="userIdSearch">user id</param>
         /// <param name="statusSearch">status</param>
+        /// <param name="getUserLastestCart">Show user lastest cart</param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> GetPaginatedCartsAsync(int pageIndex = 1, int pageSize = 10, int? idSearch = null, int? userIdSearch = null, string? statusSearch = null)
+        public async Task<IActionResult> GetPaginatedCartsAsync(int pageIndex = 1, int pageSize = 10, int? idSearch = null, int? userIdSearch = null, string? statusSearch = null, bool getUserLastestCart = false)
         {
-            PaginatedList<GetCartDTO> result = await _cartService.GetPaginatedCartsAsync(pageIndex, pageSize, idSearch, userIdSearch, statusSearch);
+            PaginatedList<GetCartDTO> result = await _cartService.GetPaginatedCartsAsync(pageIndex, pageSize, idSearch, userIdSearch, statusSearch, getUserLastestCart);
             return Ok(new BaseResponseModel<PaginatedList<GetCartDTO>>(
                     statusCode: StatusCodes.Status200OK,
                     code: ResponseCodeConstants.SUCCESS,
@@ -166,7 +167,31 @@ namespace ProductAPI.Controllers
             }
         }
 
-        #endregion 
+        #endregion
+
+        //[HttpGet("customer/get-my-carts")]
+        //public async Task<IActionResult> GetMyCartsAsync(int pageIndex = 1, int pageSize = 10, string? statusSearch = null)
+        //{
+        //    PaginatedList<GetCartDTO> result = await _cartService.GetMyCartsAsync(pageIndex, pageSize, statusSearch);
+
+        //    return Ok(new BaseResponseModel<PaginatedList<GetCartDTO>>(
+        //            statusCode: StatusCodes.Status200OK,
+        //            code: ResponseCodeConstants.SUCCESS,
+        //            data: result,
+        //            message: "Carts retrieved successfully."
+        //        ));
+        //}
+
+        //[HttpGet("customer/cart")]
+        //public async Task<ActionResult<GetCartDTO?>> GetLatestCart()
+        //{
+        //    var cart = await _cartService.GetMyLatestAvailableCartAsync();
+
+        //    if (cart == null)
+        //        return NotFound("No available cart found.");
+
+        //    return Ok(cart);
+        //}
 
     }
 }

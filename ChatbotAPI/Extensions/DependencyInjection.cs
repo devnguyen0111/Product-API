@@ -4,6 +4,7 @@ using DataAccess.Data;
 using DataAccess.IRepositories;
 using DataAccess.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.SemanticKernel;
 
 namespace ChatbotAPI.Extensions
 {
@@ -32,7 +33,18 @@ namespace ChatbotAPI.Extensions
                 options.LowercaseUrls = true;
             });
 
+            services.AddSingleton<Kernel>(AddKernal());
             return services;
+        }
+
+        public static Kernel AddKernal()
+        {
+            IKernelBuilder kernelBuilder = Kernel.CreateBuilder();
+            kernelBuilder.AddOllamaChatCompletion("qwen3:0.6b", new Uri("http://localhost:11434"));
+            kernelBuilder.Services.AddSingleton<HttpClient>();
+            Kernel kernel = kernelBuilder.Build();
+            return kernel;
+
         }
 
     }

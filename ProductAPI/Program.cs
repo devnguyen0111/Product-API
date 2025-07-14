@@ -121,7 +121,7 @@ builder.Services.AddAuthentication(options =>
 })
 .AddJwtBearer(options =>
 {
-    options.RequireHttpsMetadata = true;
+    options.RequireHttpsMetadata = string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER"));
     options.SaveToken = true;
     options.TokenValidationParameters = new TokenValidationParameters
     {
@@ -146,13 +146,20 @@ builder.Services.AddAuthorization();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER")))
+{
+    // Skip HTTPS redirection in containers - handled by reverse proxy/load balancer
+}
+else
+{
+    app.UseHttpsRedirection();
+}
 
 
 app.UseCors("AllowAllOrigins");

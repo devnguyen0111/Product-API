@@ -195,11 +195,11 @@ namespace ProductAPI.Controllers
 
                 //return Created(paymentUrl, paymentUrl);
                 return Ok(new BaseResponseModel<string>(
-                            statusCode: StatusCodes.Status200OK,
-                            code: ResponseCodeConstants.SUCCESS,
-                            data: paymentUrl,
-                            message: "Payment URL created successfully."
-                ));
+                           statusCode: StatusCodes.Status200OK,
+                           code: ResponseCodeConstants.SUCCESS,
+                           data: paymentUrl,
+                           message: "Payment URL created successfully."
+               ));
             }
             catch (Exception ex)
             {
@@ -306,6 +306,21 @@ namespace ProductAPI.Controllers
                 // Chuyển hướng đến trang lỗi nếu có exception
                 return Redirect("https://localhost:7050/swagger/payment-error?message=" + WebUtility.UrlEncode(ex.Message));
             }
+        }
+
+        [HttpGet("payment-status/{orderId}")]
+        public async Task<IActionResult> CheckPaymentStatus(int orderId)
+        {
+            var payment = await _paymentService.GetPaymentByOrderId(orderId);
+
+            if (payment == null)
+                return NotFound(new { status = "not_found" });
+
+            return Ok(new
+            {
+                status = payment.PaymentStatus, // "Pending", "Paid", etc.
+                orderId = payment.OrderId
+            });
         }
 
 

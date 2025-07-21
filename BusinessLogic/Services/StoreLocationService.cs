@@ -20,10 +20,10 @@ namespace BusinessLogic.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<StoreLocationDTO>> GetAllAsync()
+        public async Task<IEnumerable<StoreLocation>> GetAllAsync()
         {
             var repo = _unitOfWork.GetRepository<StoreLocation>();
-            var locations = repo.Entities.ToList();  
+            var locations = repo.Entities;  
 
             if (!locations.Any())
             {
@@ -33,8 +33,7 @@ namespace BusinessLogic.Services
                     "No store locations found.");
             }
 
-            var dtos = _mapper.Map<IEnumerable<StoreLocationDTO>>(locations);
-            return await Task.FromResult(dtos);
+            return await Task.FromResult(locations);
         }
     }
 }

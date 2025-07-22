@@ -252,7 +252,7 @@ namespace ProductAPI.Controllers
                 if (!paymentResult.IsSuccess)
                 {
                     // Chuyển hướng đến trang thất bại nếu thanh toán không thành công
-                    return Redirect("https://localhost:7050/swagger/Fail");
+                    return Redirect("https://154.26.135.57:8080/swagger/Fail");
                 }
 
                 // Extract orderId từ vnp_TxnRef
@@ -299,12 +299,12 @@ namespace ProductAPI.Controllers
 
 
                 // Chuyển hướng đến trang thành công
-                return Redirect("https://localhost:7050/swagger/Success");
+                return Redirect("https://154.26.135.57:8080/swagger/Success");
             }
             catch (Exception ex)
             {
                 // Chuyển hướng đến trang lỗi nếu có exception
-                return Redirect("https://localhost:7050/swagger/payment-error?message=" + WebUtility.UrlEncode(ex.Message));
+                return Redirect("https://154.26.135.57:8080/swagger/payment-error?message=" + WebUtility.UrlEncode(ex.Message));
             }
         }
 

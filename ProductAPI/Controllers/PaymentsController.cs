@@ -203,6 +203,8 @@ namespace ProductAPI.Controllers
             }
             catch (Exception ex)
             {
+                // logs error
+                Console.WriteLine($"Error creating payment: {ex.Message}");
                 // return BadRequest(ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, new BaseResponseModel<string>(
                             statusCode: StatusCodes.Status500InternalServerError,

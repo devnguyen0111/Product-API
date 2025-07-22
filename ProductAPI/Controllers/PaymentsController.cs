@@ -300,13 +300,12 @@ namespace ProductAPI.Controllers
 
 
 
-                // Chuyển hướng đến trang thành công
-                return Redirect("https://154.26.135.57:8080/swagger/Success");
+                return Redirect($"myapp://paymentresult?orderId={paymentDto.OrderId}&status=success");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // Chuyển hướng đến trang lỗi nếu có exception
-                return Redirect("https://154.26.135.57:8080/swagger/payment-error?message=" + WebUtility.UrlEncode(ex.Message));
+                return Redirect($"myapp://paymentresult?status=fail&message=Payment%20failed");
             }
         }
 

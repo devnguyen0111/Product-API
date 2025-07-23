@@ -65,3 +65,5 @@ nunit-*.xml
 
 # Publish output
 publish/
+
+**/appsettings*.json

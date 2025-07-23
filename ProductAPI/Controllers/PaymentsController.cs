@@ -3,13 +3,10 @@ using BusinessLogic.Services;
 using DataAccess.Constant;
 using DataAccess.DTO.PaymentDTOs;
 using DataAccess.DTO.PaymentDTOs.VNPay;
-using DataAccess.DTO.PaymentDTOs;
-using DataAccess.DTO.PaymentDTOs.VNPay;
-using DataAccess.Entities;
 using DataAccess.PaginatedList;
 using DataAccess.ResponseModel;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
+using ProductAPI.Util;
 using VNPAY.NET;
 using VNPAY.NET.Enums;
 using VNPAY.NET.Utilities;
@@ -175,7 +172,7 @@ namespace ProductAPI.Controllers
 
                 var cart = await _cartService.GetCartById((int)order.CartId!);
 
-                var ipAddress = NetworkHelper.GetIpAddress(HttpContext);
+                var ipAddress = NetworkUtil.GetIpAddress(HttpContext);
                 DateTime utcNow = DateTime.UtcNow; // Lấy thời gian hiện tại theo UTC
                 DateTime expireTime = utcNow.AddMinutes(15); // Đặt thời gian hết hạn giao dịch (15 phút sau)
 

@@ -209,7 +209,8 @@ namespace ProductAPI.Controllers
                             statusCode: StatusCodes.Status500InternalServerError,
                             code: ResponseCodeConstants.INTERNAL_SERVER_ERROR,
                             data: null,
-                            message: "An unexpected error occurred while creating the payment."
+                            //message: "An unexpected error occurred while creating the payment."
+                            message: ex.ToString()
                 ));
             }
         }
